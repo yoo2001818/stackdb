@@ -4,7 +4,9 @@
   "description": "Distributed and versioned database system in Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "npm run jest && npm run flow",
+    "jest": "jest",
+    "flow": "flow",
     "build": "babel src -d lib --copy-files"
   },
   "jest": {
@@ -25,6 +27,7 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
     "babel-preset-env": "^1.1.4",
     "babel-preset-react": "^6.16.0",
@@ -33,9 +36,11 @@
     "eslint-config-semistandard": "^7.0.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-config-standard-jsx": "^3.2.0",
+    "eslint-plugin-flowtype": "^2.30.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-standard": "^2.0.1",
+    "flow-bin": "^0.38.0",
     "jest": "^18.1.0"
   }
 }
