@@ -7,10 +7,10 @@ describe('findMutualParent', () => {
       parent: 1,
     }, {
       id: 'bbbb',
-      parent: 2,
+      parent: 1,
     }, {
       id: 'cccc',
-      parent: 3,
+      parent: 1,
     }];
     expect(findMutualParent(branches, branches)).toEqual(2);
   });
