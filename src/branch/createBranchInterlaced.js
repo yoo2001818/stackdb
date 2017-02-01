@@ -1,12 +1,12 @@
 // @flow
 import type { Transaction, Branch } from './index';
 
-type BranchModel = Array<Transaction, BranchModel[]>;
+type BranchModel = Array<Transaction | BranchModel[]>;
 
 export default function createBranchInterlaced(
   transactions: BranchModel
 ): Branch {
-  let flattened: Transaction = [];
+  let flattened: Branch = [];
   let parents: void | Number[];
   transactions.forEach(transaction => {
     if (Array.isArray(transaction)) {
