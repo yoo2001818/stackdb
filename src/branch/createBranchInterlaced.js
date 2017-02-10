@@ -7,7 +7,7 @@ export default function createBranchInterlaced(
   transactions: BranchModel
 ): Branch {
   let flattened: Branch = [];
-  let parents: void | Number[];
+  let parents: null | number[] = null;
   transactions.forEach(transaction => {
     if (Array.isArray(transaction)) {
       let branches = transaction.map(createBranchInterlaced);
@@ -40,7 +40,8 @@ export default function createBranchInterlaced(
         let parent;
         if (parents != null) parent = parents.map(v => flattened.length - v);
         else parent = 1;
-        flattened.push(Object.assign({ parent }, transaction));
+        // Flow requires something like this
+        flattened.push(Object.assign({}, { parent }, transaction));
         parents = null;
       }
     }

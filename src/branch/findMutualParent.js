@@ -11,7 +11,7 @@ import type { Branch } from './index';
 export default function findMutualParent(
   branch1: Branch,
   branch2: Branch,
-): Number {
+): number {
   let index1 = branch1.length - 1;
   let index2 = branch2.length - 1;
   let toggle = false;
