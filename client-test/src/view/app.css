@@ -1,0 +1,11 @@
+.app {
+  color: #000;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}

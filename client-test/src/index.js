@@ -6,6 +6,7 @@ import App from './view/app';
 // Create container element
 let container = document.createElement('div');
 document.body.appendChild(container);
+container.className = 'root';
 
 // Create state
 // I could have used redux, but I wanted to make it simple as possible.
@@ -13,12 +14,7 @@ let state = {};
 let reducers = {
   clients: {
     init: () => [],
-    addClient: (action, state) => state,
-  },
-  counter: {
-    init: () => 0,
-    increment: (action, state) => state + 1,
-    reset: () => 0,
+    addClient: (action, state) => state.concat([action.data]),
   },
 };
 

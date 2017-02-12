@@ -1,20 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
+import ClientList from '../component/clientList';
+
+import { app as appClass } from './app.css';
+
 export default class App extends Component {
   render() {
-    const { counter } = this.props.state;
     return (
-      <div>
-        <p>Hello, world!</p>
-        <p>I am a counter: {counter}</p>
-        <p>
-          <button onClick={() => this.props.update({ type: 'increment' })}>
-            Increment
-          </button>
-          <button onClick={() => this.props.update({ type: 'reset' })}>
-            Reset
-          </button>
-        </p>
+      <div className={appClass}>
+        <ClientList />
       </div>
     );
   }
@@ -22,7 +16,7 @@ export default class App extends Component {
 
 App.propTypes = {
   state: PropTypes.shape({
-    counter: PropTypes.number,
+    clients: PropTypes.array,
   }).isRequired,
   update: PropTypes.func.isRequired,
 };
