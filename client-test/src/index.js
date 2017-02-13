@@ -14,7 +14,7 @@ let state = {};
 let reducers = {
   clients: {
     init: () => [],
-    addClient: (action, state) => state.concat([action.data]),
+    clientAdd: (action, state) => state.concat([action.data]),
   },
 };
 
