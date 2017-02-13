@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import App from './view/app';
+import * as reducers from './reducer';
 
 // Create container element
 let container = document.createElement('div');
@@ -11,12 +12,6 @@ container.className = 'root';
 // Create state
 // I could have used redux, but I wanted to make it simple as possible.
 let state = {};
-let reducers = {
-  clients: {
-    init: () => [],
-    clientAdd: (action, state) => state.concat([action.data]),
-  },
-};
 
 function updateStore(action) {
   let newState = {};

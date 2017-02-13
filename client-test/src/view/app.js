@@ -9,10 +9,10 @@ export default class App extends Component {
     const { state: { clients }, update } = this.props;
     return (
       <div className={style.app}>
-        <ClientList clients={clients} onAdd={() => update({
-          type: 'clientAdd',
-          data: {},
-        })} />
+        <ClientList clients={clients}
+          onAdd={() => update({ type: 'clientAdd', data: {} })}
+          onRemove={id => update({ type: 'clientRemove', id })}
+        />
       </div>
     );
   }
