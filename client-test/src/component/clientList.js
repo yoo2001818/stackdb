@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import ClientCard from './clientCard';
+
 import style from './clientList.css';
 
 export default class ClientList extends Component {
@@ -8,7 +10,8 @@ export default class ClientList extends Component {
     return (
       <ul className={style.clientList}>
         { clients.map((client, id) => (
-          <li key={id} onClick={onRemove.bind(null, id)}>A client</li>
+          <ClientCard key={id} client={client}
+            onRemove={onRemove.bind(null, id)} />
         ))}
         <li onClick={onAdd}>Create new...</li>
       </ul>
