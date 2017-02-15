@@ -1,3 +1,18 @@
-.clientList {
+@import url(../style/color.css);
+@import url(./clientCard.css);
+@import url(./button.css);
 
+.clientList {
+  padding: 0.5em;
+  & > ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  & > .addButton {
+    width: var(--clientCardHeaderWidth);
+    & > button {
+      @apply --button;
+    }
+  }
 }

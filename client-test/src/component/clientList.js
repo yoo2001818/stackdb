@@ -8,13 +8,17 @@ export default class ClientList extends Component {
   render() {
     const { clients, onAdd, onRemove } = this.props;
     return (
-      <ul className={style.clientList}>
-        { clients.map((client, id) => (
-          <ClientCard key={id} client={client}
-            onRemove={onRemove.bind(null, id)} />
-        ))}
-        <li onClick={onAdd}>Create new...</li>
-      </ul>
+      <div className={style.clientList}>
+        <ul>
+          { clients.map((client, id) => (
+            <ClientCard key={id} client={client}
+              onRemove={onRemove.bind(null, id)} />
+          ))}
+        </ul>
+        <div className={style.addButton}>
+          <button onClick={onAdd}>Create new...</button>
+        </div>
+      </div>
     );
   }
 }

@@ -1,0 +1,42 @@
+@import url(../style/color.css);
+
+:root {
+  --clientCardHeaderWidth: 10em;
+}
+
+.clientCard {
+  display: block;
+  margin: 0.5em 0;
+  & > .header {
+    display: inline-block;
+    width: var(--clientCardHeaderWidth);
+    padding: 0.5em;
+    border-radius: 0.2em;
+    box-sizing: border-box;
+    border: 1px solid var(--grey-400);
+    background: var(--grey-200);
+    line-height: 1.5em;
+    & > .title {
+      line-height: 1.5em;
+      float: left;
+    }
+    & > .remove {
+      display: block;
+      float: right;
+      width: auto;
+      margin: 0;
+      border: none;
+      background: none;
+      color: var(--red-800);
+      line-height: 1.5em;
+      &:before {
+        content: '×';
+      }
+    }
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+}
