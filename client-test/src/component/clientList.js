@@ -6,13 +6,13 @@ import style from './clientList.css';
 
 export default class ClientList extends Component {
   render() {
-    const { clients, onAdd, onRemove } = this.props;
+    const { clients, onAdd, update } = this.props;
     return (
       <div className={style.clientList}>
         <ul>
           { clients.map((client, id) => (
             <ClientCard key={id} client={client}
-              onRemove={onRemove.bind(null, id)} />
+              onAction={data => update(Object.assign({ id }, data))} />
           ))}
         </ul>
         <div className={style.addButton}>
@@ -26,5 +26,5 @@ export default class ClientList extends Component {
 ClientList.propTypes = {
   clients: PropTypes.array,
   onAdd: PropTypes.func,
-  onRemove: PropTypes.func,
+  update: PropTypes.func,
 };

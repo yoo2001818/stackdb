@@ -11,7 +11,7 @@ export default class App extends Component {
       <div className={style.app}>
         <ClientList clients={clients}
           onAdd={() => update({ type: 'clientAdd', data: {} })}
-          onRemove={id => update({ type: 'clientRemove', id })}
+          update={update}
         />
       </div>
     );

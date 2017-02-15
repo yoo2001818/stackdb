@@ -1,4 +1,5 @@
 @import url(../style/color.css);
+@import url(./button.css);
 
 :root {
   --clientCardHeaderWidth: 10em;
@@ -15,20 +16,23 @@
     box-sizing: border-box;
     border: 1px solid var(--grey-400);
     background: var(--grey-200);
-    line-height: 1.5em;
+    vertical-align: middle;
     & > .title {
-      line-height: 1.5em;
       float: left;
+      line-height: 1.5em;
     }
-    & > .remove {
+    & > .remove, & > .commit {
       display: block;
       float: right;
-      width: auto;
+      width: 1.8em;
+      text-align: center;
       margin: 0;
       border: none;
       background: none;
-      color: var(--red-800);
       line-height: 1.5em;
+    }
+    & > .remove {
+      color: var(--red-800);
       &:before {
         content: '×';
       }
@@ -37,6 +41,35 @@
       content: '';
       display: block;
       clear: both;
+    }
+  }
+  & > .transactions {
+    vertical-align: middle;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    & > .transaction {
+      display: inline-block;
+      margin: 0 0.5rem;
+      font-size: 0;
+      vertical-align: middle;
+      line-height: 1.5rem;
+      &:before {
+        font-size: 1rem;
+        content: '⚫';
+      }
+    }
+  }
+  & > .commit {
+    @apply --button;
+    @apply --button-green;
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.8em;
+    line-height: 1.5em;
+    &:before {
+      content: '+';
     }
   }
 }

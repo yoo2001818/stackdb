@@ -19,7 +19,8 @@
   "homepage": "https://github.com/yoo2001818/stackdb#readme",
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

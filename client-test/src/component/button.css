@@ -3,7 +3,7 @@
     display: block;
     width: 100%;
     text-align: center;
-    margin: 1em auto;
+    margin: 0 auto;
     padding: 0.5em;
     border: none;
     background-color: var(--blue-700);
@@ -11,6 +11,13 @@
     border-radius: 0.2em;
     &:hover {
       background-color: var(--blue-600);
+    }
+  }
+  --button-green: {
+    background-color: var(--green-700);
+    color: var(--green-100);
+    &:hover {
+      background-color: var(--green-600);
     }
   }
 }
