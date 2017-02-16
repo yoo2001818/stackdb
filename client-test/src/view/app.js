@@ -6,10 +6,10 @@ import style from './app.css';
 
 export default class App extends Component {
   render() {
-    const { state: { clients }, update } = this.props;
+    const { state: { clients, time: { current } }, update } = this.props;
     return (
       <div className={style.app}>
-        <ClientList clients={clients}
+        <ClientList clients={clients} time={current}
           onAdd={() => update({ type: 'clientAdd', data: {} })}
           update={update}
         />

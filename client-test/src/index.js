@@ -17,7 +17,7 @@ function updateStore(action) {
   let newState = {};
   for (let key in reducers) {
     let handler = reducers[key][action.type];
-    if (handler != null) newState[key] = handler(action, state[key]);
+    if (handler != null) newState[key] = handler(action, state[key], state);
     else newState[key] = state[key];
   }
   state = newState;

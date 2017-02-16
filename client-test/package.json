@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/yoo2001818/stackdb#readme",
   "dependencies": {
+    "classnames": "^2.2.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "uuid": "^3.0.1"

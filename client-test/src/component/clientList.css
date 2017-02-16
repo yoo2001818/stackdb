@@ -4,10 +4,12 @@
 
 .clientList {
   padding: 0.5em;
-  & > ul {
+  & > table {
     padding: 0;
     margin: 0;
-    list-style-type: none;
+    & td {
+      border: 1px solid var(--grey-800);
+    }
   }
   & > .addButton {
     width: var(--clientCardHeaderWidth);

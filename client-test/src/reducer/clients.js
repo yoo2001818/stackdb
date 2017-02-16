@@ -1,5 +1,3 @@
-import uuid from 'uuid/v4';
-
 export default {
   init: () => [],
   clientAdd: (action, state) => state.concat([
@@ -7,11 +5,11 @@ export default {
       transactions: [] }, action.data),
   ]),
   clientRemove: (action, state) => state.filter((_, id) => action.id !== id),
-  clientCommit: (action, state) => state.map((v, id) => {
+  clientCommit: (action, state, globalState) => state.map((v, id) => {
     if (id !== action.id) return v;
     return Object.assign({}, v, {
       transactions: v.transactions.concat([{
-        id: uuid(),
+        id: globalState.time.current,
       }]),
     });
   }),
