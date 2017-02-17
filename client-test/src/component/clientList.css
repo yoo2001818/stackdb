@@ -1,14 +1,93 @@
 @import url(../style/color.css);
-@import url(./clientCard.css);
 @import url(./button.css);
 
+:root {
+  --clientCardHeaderWidth: 10em;
+}
+
+.clientCard {
+  & > .header {
+    width: var(--clientCardHeaderWidth);
+    padding: 0.1em;
+    & > .content {
+      display: flex;
+      padding: 0.5em;
+      border-radius: 0.2em;
+      border: 1px solid var(--grey-400);
+      background: var(--grey-200);
+      vertical-align: middle;
+      text-align: justify;
+      & > .title {
+        flex: 1 1 auto;
+      }
+      & > .remove {
+        display: block;
+        float: right;
+        width: 1.8em;
+        text-align: center;
+        margin: 0;
+        border: none;
+        background: none;
+        line-height: 1.5em;
+        color: var(--red-800);
+        &:before {
+          content: '×';
+        }
+      }
+    }
+  }
+  & > .timeFrame {
+    width: 2em;
+    margin: 0 0.5rem;
+    font-size: 0;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5rem;
+    border: none;
+    color: var(--blue-800);
+    background-image: linear-gradient(0deg, transparent 48%,
+        var(--blue-700) 48%, var(--blue-700) 52%, transparent 52%),
+      linear-gradient(90deg, transparent 48%,
+        var(--grey-400) 48%, var(--grey-400) 52%, transparent 52%);
+  }
+  & > .transaction {
+    &:before {
+      font-size: 1.5rem;
+      vertical-align: middle;
+      line-height: 1.5rem;
+      content: '⚫';
+    }
+  }
+  & > .commit {
+    border: none;
+    margin: 0.1em;
+    & > .commitButton {
+      @apply --button;
+      @apply --button-green;
+      line-height: 1.6em;
+      vertical-align: middle;
+      &:before {
+        content: '+';
+      }
+    }
+  }
+}
 .clientList {
   padding: 0.5em;
   & > table {
     padding: 0;
     margin: 0;
+    border-collapse: collapse;
+    & thead .header {
+      width: var(--clientCardHeaderWidth);
+    }
+    & thead .timeFrame {
+      text-align: center;
+      width: 2em;
+    }
     & td {
-      border: 1px solid var(--grey-800);
+      margin: 0;
+      padding: 0;
     }
   }
   & > .addButton {

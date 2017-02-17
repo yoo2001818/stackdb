@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-import style from './clientCard.css';
+import style from './clientList.css';
 
 export default class ClientCard extends Component {
   render() {
@@ -9,12 +9,15 @@ export default class ClientCard extends Component {
     return (
       <tr className={style.clientCard}>
         <td className={style.header}>
-          <span className={style.title}>
-            { client.id }
-          </span>
-          <button className={style.remove} onClick={onAction.bind(null, {
-            type: 'clientRemove',
-          })} />
+          <div className={style.content}>
+            <span className={style.title}>
+              { client.id }
+            </span>
+            {' '}
+            <button className={style.remove} onClick={onAction.bind(null, {
+              type: 'clientRemove',
+            })} />
+          </div>
         </td>
         {Array.from({ length: time }).map((_, i) => {
           let transaction = client.transactions.find(v => v.id === i);
@@ -26,7 +29,7 @@ export default class ClientCard extends Component {
           );
         })}
         <td className={style.commit}>
-          <button className={style.commit} onClick={onAction.bind(null, {
+          <button className={style.commitButton} onClick={onAction.bind(null, {
             type: 'clientCommit',
           })} />
         </td>

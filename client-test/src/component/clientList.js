@@ -12,11 +12,11 @@ export default class ClientList extends Component {
         <table>
           <thead>
             <tr>
-              <td className={style.header}>Client</td>
+              <td className={style.header} />
               {Array.from({ length: time }).map((_, i) => (
                 <td className={style.timeFrame} key={i}>{i}</td>
               ))}
-              <td className={style.commit}>Commit</td>
+              <td className={style.commit} />
             </tr>
           </thead>
           <tbody>
