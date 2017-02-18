@@ -5,7 +5,7 @@ import style from './clientList.css';
 
 export default class ClientCard extends Component {
   render() {
-    const { client, time, onAction } = this.props;
+    const { client, index, time, onAction } = this.props;
     return (
       <tr className={style.clientCard}>
         <td className={style.header}>
@@ -33,6 +33,12 @@ export default class ClientCard extends Component {
             type: 'clientCommit',
           })} />
         </td>
+        <td className={style.merge}>
+          <button className={style.mergeButton} onClick={onAction.bind(null, {
+            type: 'clientMerge',
+            targetId: index + 1,
+          })} />
+        </td>
       </tr>
     );
   }
@@ -42,6 +48,7 @@ ClientCard.propTypes = {
   client: PropTypes.shape({
     id: PropTypes.number,
   }),
+  index: PropTypes.number,
   time: PropTypes.number,
   onAction: PropTypes.func,
 };

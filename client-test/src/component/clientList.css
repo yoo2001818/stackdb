@@ -60,7 +60,7 @@
   }
   & > .commit {
     border: none;
-    margin: 0.1em;
+    padding: 0.1em;
     & > .commitButton {
       @apply --button;
       @apply --button-green;
@@ -68,6 +68,18 @@
       vertical-align: middle;
       &:before {
         content: '+';
+      }
+    }
+  }
+  & > .merge {
+    border: none;
+    padding: 0.1em;
+    & > .mergeButton {
+      @apply --button;
+      line-height: 1.6em;
+      vertical-align: middle;
+      &:before {
+        content: 'M';
       }
     }
   }

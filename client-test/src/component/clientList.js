@@ -17,11 +17,12 @@ export default class ClientList extends Component {
                 <td className={style.timeFrame} key={i}>{i}</td>
               ))}
               <td className={style.commit} />
+              <td className={style.merge} />
             </tr>
           </thead>
           <tbody>
             {clients.map((client, id) => (
-              <ClientCard key={id} client={client} time={time}
+              <ClientCard key={id} client={client} time={time} index={id}
                 onAction={data => update(Object.assign({ id }, data))} />
             ))}
           </tbody>

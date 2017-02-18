@@ -13,4 +13,5 @@ export default {
       }]),
     });
   }),
+  clientMerge: (action, state) => state,
 };
