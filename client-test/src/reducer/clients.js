@@ -1,3 +1,5 @@
+import findMutualParent from 'stackdb/branch/findMutualParent';
+
 export default {
   init: () => [],
   clientAdd: (action, state) => state.concat([
@@ -10,8 +12,14 @@ export default {
     return Object.assign({}, v, {
       transactions: v.transactions.concat([{
         id: globalState.time.current,
+        parent: 1,
       }]),
     });
   }),
-  clientMerge: (action, state) => state,
+  clientMerge: (action, state) => {
+    let master = state[action.id];
+    let slave = state[action.targetId];
+    console.log(findMutualParent(master.transactions, slave.transactions));
+    return state;
+  },
 };

@@ -33,5 +33,6 @@ export default function findMutualParent(
     }
     toggle = !toggle;
   }
+  if (index2 < 0) return null;
   return index2;
 }
