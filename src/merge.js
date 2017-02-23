@@ -3,22 +3,34 @@ import type { Branch } from './branch';
 import findMutualParent from './branch/findMutualParent';
 
 export default function merge(merger: Branch, mergee: Branch,
-  conflictDetector: Function, orderer: (mergee: Branch,
-    transaction: Transaction) => Number,
+  conflictDetector: Function,
+  orderer: (transactions: Transaction[]) => Number,
 ): Branch {
-  // Slice the merger and mergee to the mutual parent.
+  let source = [merger, mergee];
+  let mapping = [[], []];
+
   let mutualIndex = findMutualParent(merger, mergee);
-  let mergerTemp = merger.slice(mutualIndex + 1);
-  // Create some kind of linked list. We need to create reverse index to
-  // preserve the parent links while inserting transactions.
-  let mergeeTemp = mergee.slice(mutualIndex + 1);
-  // Read each transaction from merger and push into mergee
-  mergerTemp.forEach(transaction => {
-    let position = orderer(mergeeTemp, transaction);
-    // TODO Push it to mergee, while keeping other transaction's parent
-    // indexes
-  });
+  let indexes = [mutualIndex + 1, mutualIndex + 1];
+  let output = merger.slice(0, mutualIndex + 1);
+  mapping.map(v => v[mutualIndex] = mutualIndex);
+
+  while (indexes.some((v, i) => v >= source[i].length)) {
+    let selected = orderer(source.map((v, i) => v[indexes[i]]));
+    let selectedMapping = mapping[selected];
+    let selectedIndex = indexes[selected];
+    let selectedSource = source[selected];
+    selectedMapping[selectedIndex] = output.length - 1;
+    let parent = selectedSource[selectedIndex].parent;
+    if (Array.isArray(parent)) {
+      parent = parent.map(v => selectedMapping[selectedIndex - v]);
+    } else {
+      parent = selectedMapping[selectedIndex - parent];
+    }
+    // Push transaction to output
+    output.push(Object.assign({}, selectedSource[selectedIndex], { parent }));
+    indexes[selected] ++;
+  }
   // TODO Create merge transaction
-  // Done! Change the internal format to arrays.
-  return mergee;
+  // Done!
+  return output;
 }
