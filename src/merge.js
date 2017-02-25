@@ -11,6 +11,7 @@ export default function merge(merger: Branch, mergee: Branch,
   let mapping = [[], []];
 
   let mutualIndex = findMutualParent(merger, mergee);
+  if (mutualIndex == null) mutualIndex = -1;
   let indexes = [mutualIndex + 1, mutualIndex + 1];
   let output = merger.slice(0, mutualIndex + 1);
   mapping.map(v => v[mutualIndex] = mutualIndex);

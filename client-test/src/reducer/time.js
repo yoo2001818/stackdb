@@ -3,4 +3,7 @@ export default {
   clientCommit: (action, state) => Object.assign({}, state, {
     current: state.current + 1,
   }),
+  clientMerge: (action, state) => Object.assign({}, state, {
+    current: state.current + 1,
+  }),
 };

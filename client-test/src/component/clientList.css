@@ -66,6 +66,9 @@
     &.green {
       color: var(--green-800);
     }
+    &.black {
+      color: var(--grey-800);
+    }
   }
   & > .commit {
     border: none;

@@ -3,7 +3,8 @@ import classNames from 'classnames';
 
 import style from './clientList.css';
 
-const COLOR_TABLE = [style.blue, style.red, style.green, style.orange];
+const COLOR_TABLE = [style.blue, style.red, style.green, style.orange,
+  style.black];
 
 export default class ClientCard extends Component {
   render() {

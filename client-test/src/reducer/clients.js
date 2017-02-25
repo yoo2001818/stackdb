@@ -1,4 +1,4 @@
-import findMutualParent from 'stackdb/branch/findMutualParent';
+import merge from 'stackdb/merge';
 
 export default {
   init: () => [],
@@ -20,10 +20,23 @@ export default {
       }]),
     });
   }),
-  clientMerge: (action, state) => {
+  clientMerge: (action, state, globalState) => {
     let master = state[action.id];
     let slave = state[action.targetId];
-    console.log(findMutualParent(master.transactions, slave.transactions));
-    return state;
+    let merged = merge(master.transactions, slave.transactions, null,
+      arr => {
+        let smallest = arr.findIndex(v => v != null);
+        arr.forEach((v, i) => {
+          if (v != null && v.id < arr[smallest].id) smallest = i;
+        });
+        return smallest;
+      }, () => ({ id: globalState.time.current, parent: 1, color: 4 })
+    );
+    console.log(merged);
+    let newState = state.slice();
+    newState[action.id] = Object.assign({}, master, { transactions: merged });
+    newState[action.targetId] = Object.assign({}, slave,
+      { transactions: merged });
+    return newState;
   },
 };
