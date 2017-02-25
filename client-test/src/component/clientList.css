@@ -57,6 +57,15 @@
       line-height: 1.5rem;
       content: '⚫';
     }
+    &.red {
+      color: var(--red-800);
+    }
+    &.orange {
+      color: var(--orange-800);
+    }
+    &.green {
+      color: var(--green-800);
+    }
   }
   & > .commit {
     border: none;

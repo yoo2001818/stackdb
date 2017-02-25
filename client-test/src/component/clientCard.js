@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 import style from './clientList.css';
 
+const COLOR_TABLE = [style.blue, style.red, style.green, style.orange];
+
 export default class ClientCard extends Component {
   render() {
     const { client, index, time, onAction } = this.props;
@@ -23,7 +25,9 @@ export default class ClientCard extends Component {
           let transaction = client.transactions.find(v => v.id === i);
           return (
             <td key={i} className={classNames(style.timeFrame,
-              {[style.transaction]: transaction != null})}>
+              {[style.transaction]: transaction != null},
+              transaction && COLOR_TABLE[transaction.color]
+            )}>
               {transaction && 'Transaction'}
             </td>
           );
