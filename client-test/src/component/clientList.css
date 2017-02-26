@@ -51,6 +51,7 @@
         var(--grey-400) 48%, var(--grey-400) 52%, transparent 52%);
   }
   & > .transaction {
+    position: relative;
     &:before {
       font-size: 1.5rem;
       vertical-align: middle;
@@ -68,6 +69,12 @@
     }
     &.black {
       color: var(--grey-800);
+    }
+    & > .parent {
+      position: absolute;
+      font-size: 0.8rem;
+      bottom: 0;
+      right: 0;
     }
   }
   & > .commit {

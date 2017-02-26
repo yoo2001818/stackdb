@@ -6,6 +6,11 @@ import style from './clientList.css';
 const COLOR_TABLE = [style.blue, style.red, style.green, style.orange,
   style.black];
 
+function join(parent) {
+  if (Array.isArray(parent)) return parent.join(',');
+  return parent;
+}
+
 export default class ClientCard extends Component {
   render() {
     const { client, index, time, onAction } = this.props;
@@ -29,7 +34,11 @@ export default class ClientCard extends Component {
               {[style.transaction]: transaction != null},
               transaction && COLOR_TABLE[transaction.color]
             )}>
-              {transaction && 'Transaction'}
+              {transaction && (
+                <span className={style.parent}>
+                  {join(transaction.parent)}
+                </span>
+              )}
             </td>
           );
         })}
