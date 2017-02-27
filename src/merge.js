@@ -14,6 +14,7 @@ export default function merge(merger: Branch, mergee: Branch,
   if (mutualIndex == null) mutualIndex = -1;
   let indexes = [mutualIndex + 1, mutualIndex + 1];
   let output = merger.slice(0, mutualIndex + 1);
+  console.log(mutualIndex, output);
   mapping.map(v => v[mutualIndex] = mutualIndex);
   while (indexes.some((v, i) => v < source[i].length)) {
     let selected = orderer(source.map((v, i) => v[indexes[i]]));
@@ -36,6 +37,7 @@ export default function merge(merger: Branch, mergee: Branch,
   let merged = createMergeTransaction();
   merged.parent = mapping.map((v, i) => output.length - v[indexes[i] - 1]);
   output.push(merged);
+  console.log(output);
   // Done!
   return output;
 }

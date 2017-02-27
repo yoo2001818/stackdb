@@ -16,7 +16,7 @@ export default function findMutualParent(
   let index2 = branch2.length - 1;
   let toggle = false;
   while ((index1 >= 0 && index2 >= 0) &&
-    branch1[index1].id !== branch2[index2].id
+    !(index1 === index2 && branch1[index1].id === branch2[index2].id)
   ) {
     if (toggle) {
       if (index1 >= index2) {
@@ -33,6 +33,6 @@ export default function findMutualParent(
     }
     toggle = !toggle;
   }
-  if (index2 < 0) return null;
+  if (index1 < 0 || index2 < 0) return null;
   return index2;
 }

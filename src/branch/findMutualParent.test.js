@@ -32,4 +32,12 @@ describe('findMutualParent', () => {
     let branches4 = createBranchInterlaced(mutual.concat([{id: 'nom'}]));
     expect(findMutualParent(branches3, branches4)).toBe(3);
   });
+  it('Regression test', () => {
+    let branches1 = createBranchInterlaced([2, 5].map(v => ({ id: v })));
+    let branches2 = [0, 3].map(v => ({ id: v }));
+    let branches3 = [1, 4].map(v => ({ id: v }));
+    let branches4 = createBranchInterlaced(
+      [[branches2, branches3], {id: 6}]);
+    expect(findMutualParent(branches4, branches1)).toBe(null);
+  });
 });
