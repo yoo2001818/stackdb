@@ -15,14 +15,16 @@ export default function merge(merger: Branch, mergee: Branch,
   let indexes = [mutualIndex + 1, mutualIndex + 1];
   let output = merger.slice(0, mutualIndex + 1);
   console.log(mutualIndex, output);
-  mapping.map(v => v[mutualIndex] = mutualIndex);
+  console.log(merger, mergee);
+  mapping.forEach(v => v[-1] = -1);
+  mapping.forEach(v => v[mutualIndex] = mutualIndex);
   while (indexes.some((v, i) => v < source[i].length)) {
     let selected = orderer(source.map((v, i) => v[indexes[i]]));
     let selectedMapping = mapping[selected];
     let selectedIndex = indexes[selected];
     let selectedSource = source[selected];
-    selectedMapping[selectedIndex] = output.length;
-    let parent = selectedSource[selectedIndex].parent;
+    let transaction = selectedSource[selectedIndex];
+    let parent = transaction.parent;
     if (Array.isArray(parent)) {
       parent = parent.map(v =>
         output.length - selectedMapping[selectedIndex - v]);
@@ -30,8 +32,17 @@ export default function merge(merger: Branch, mergee: Branch,
       parent = output.length - selectedMapping[selectedIndex - parent];
     }
     // Push transaction to output
-    output.push(Object.assign({}, selectedSource[selectedIndex], { parent }));
-    indexes[selected] ++;
+    output.push(Object.assign({}, transaction, { parent }));
+    // Increment indexes with same transaction ID.
+    indexes = indexes.map((index, i) => {
+      let target = source[i][index];
+      if (target != null && target.id === transaction.id) {
+        // Set the mapping to current.
+        mapping[i][index] = output.length - 1;
+        return index + 1;
+      }
+      return index;
+    });
   }
   // Create merge transaction
   let merged = createMergeTransaction();

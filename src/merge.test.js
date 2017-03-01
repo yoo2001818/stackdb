@@ -20,11 +20,11 @@ describe('merge', () => {
     let branches1 = [{ id: 0, parent: 1 }];
     let branches2 = [{ id: 1, parent: 1 }];
     let branches3 = [{ id: 2, parent: 1 }];
-    branches1 = merge(branches1, branches2, null,
+    branches1 = branches2 = merge(branches1, branches2, null,
       smallestFinder, () => ({ id: 3 }));
-    branches2 = merge(branches2, branches3, null,
+    branches2 = branches3 = merge(branches2, branches3, null,
       smallestFinder, () => ({ id: 4 }));
-    branches1 = merge(branches1, branches2, null,
+    branches1 = branches2 = merge(branches1, branches2, null,
       smallestFinder, () => ({ id: 5 }));
     expect(branches1).toEqual([
       { id: 0, parent: 1 },
