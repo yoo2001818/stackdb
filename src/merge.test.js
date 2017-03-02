@@ -32,7 +32,6 @@ describe('merge', () => {
       { id: 2, parent: 3 },
       { id: 3, parent: [3, 2] },
       { id: 4, parent: [1, 2] },
-      { id: 5, parent: 1 },
     ]);
   });
 });

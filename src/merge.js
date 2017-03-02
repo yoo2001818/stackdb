@@ -9,7 +9,26 @@ export default function merge(merger: Branch, mergee: Branch,
 ): Branch {
   let source = [merger, mergee];
   let mapping = [[], []];
-
+  let fastForward = false;
+  // If we have a transaction after smaller branch's last transaction, consider
+  // it a fast forward
+  {
+    let smallest, biggest;
+    if (merger.length > mergee.length) {
+      smallest = mergee;
+      biggest = merger;
+    } else {
+      smallest = merger;
+      biggest = mergee;
+    }
+    let smallestLast = smallest[smallest.length - 1];
+    for (let i = biggest.length - 1; i >= 0; --i) {
+      if (biggest[i].id === smallestLast.id) {
+        fastForward = true;
+        break;
+      }
+    }
+  }
   let mutualIndex = findMutualParent(merger, mergee);
   if (mutualIndex == null) mutualIndex = -1;
   let indexes = [mutualIndex + 1, mutualIndex + 1];
@@ -45,9 +64,11 @@ export default function merge(merger: Branch, mergee: Branch,
     });
   }
   // Create merge transaction
-  let merged = createMergeTransaction();
-  merged.parent = mapping.map((v, i) => output.length - v[indexes[i] - 1]);
-  output.push(merged);
+  if (!fastForward) {
+    let merged = createMergeTransaction();
+    merged.parent = mapping.map((v, i) => output.length - v[indexes[i] - 1]);
+    output.push(merged);
+  }
   console.log(output);
   // Done!
   return output;
