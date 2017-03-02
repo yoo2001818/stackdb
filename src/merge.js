@@ -21,7 +21,7 @@ export default function merge(merger: Branch, mergee: Branch,
       smallest = merger;
       biggest = mergee;
     }
-    let smallestLast = smallest[smallest.length - 1];
+    let smallestLast = smallest[smallest.length - 1] || {};
     for (let i = biggest.length - 1; i >= 0; --i) {
       if (biggest[i].id === smallestLast.id) {
         fastForward = true;
@@ -33,6 +33,10 @@ export default function merge(merger: Branch, mergee: Branch,
   if (mutualIndex == null) mutualIndex = -1;
   let indexes = [mutualIndex + 1, mutualIndex + 1];
   let output = merger.slice(0, mutualIndex + 1);
+  function getIndex(selectedMapping, index) {
+    if (mutualIndex > index) return index;
+    return selectedMapping[index];
+  }
   console.log(mutualIndex, output);
   console.log(merger, mergee);
   mapping.forEach(v => v[-1] = -1);
@@ -46,9 +50,10 @@ export default function merge(merger: Branch, mergee: Branch,
     let parent = transaction.parent;
     if (Array.isArray(parent)) {
       parent = parent.map(v =>
-        output.length - selectedMapping[selectedIndex - v]);
+        output.length - getIndex(selectedMapping, selectedIndex - v));
     } else {
-      parent = output.length - selectedMapping[selectedIndex - parent];
+      parent = output.length -
+        getIndex(selectedMapping, selectedIndex - parent);
     }
     // Push transaction to output
     output.push(Object.assign({}, transaction, { parent }));
