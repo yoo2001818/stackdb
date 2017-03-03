@@ -3,7 +3,6 @@ import type { Branch } from './branch';
 import findMutualParent from './branch/findMutualParent';
 
 export default function merge(merger: Branch, mergee: Branch,
-  conflictDetector: Function,
   orderer: (transactions: Transaction[]) => Number,
   createMergeTransaction: () => Transaction,
 ): Branch {

@@ -23,7 +23,7 @@ export default {
   clientMerge: (action, state, globalState) => {
     let master = state[action.id];
     let slave = state[action.targetId];
-    let merged = merge(master.transactions, slave.transactions, null,
+    let merged = merge(master.transactions, slave.transactions,
       arr => {
         let smallest = arr.findIndex(v => v != null);
         arr.forEach((v, i) => {
