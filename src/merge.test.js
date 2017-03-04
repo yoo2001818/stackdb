@@ -1,11 +1,9 @@
 import merge from './merge';
 
-const smallestFinder = arr => {
-  let smallest = arr.findIndex(v => v != null);
-  arr.forEach((v, i) => {
-    if (v != null && v.id < arr[smallest].id) smallest = i;
-  });
-  return smallest;
+const smallestFinder = (a, b) => {
+  if (a == null) return 1;
+  if (b == null) return -1;
+  return a.id - b.id;
 };
 
 describe('merge', () => {

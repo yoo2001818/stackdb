@@ -3,7 +3,7 @@ import type { Branch } from './branch';
 import findMutualParent from './branch/findMutualParent';
 
 export default function merge(merger: Branch, mergee: Branch,
-  orderer: (transactions: Transaction[]) => Number,
+  orderer: (a: Transaction, b: Transaction) => Number,
   createMergeTransaction: () => Transaction,
 ): Branch {
   let source = [merger, mergee];
@@ -41,7 +41,8 @@ export default function merge(merger: Branch, mergee: Branch,
   mapping.forEach(v => v[-1] = -1);
   mapping.forEach(v => v[mutualIndex] = mutualIndex);
   while (indexes.some((v, i) => v < source[i].length)) {
-    let selected = orderer(source.map((v, i) => v[indexes[i]]));
+    let order = orderer(source[0][indexes[0]], source[1][indexes[1]]);
+    let selected = order < 0 ? 0 : 1;
     let selectedMapping = mapping[selected];
     let selectedIndex = indexes[selected];
     let selectedSource = source[selected];

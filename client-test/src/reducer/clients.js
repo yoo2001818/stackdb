@@ -24,12 +24,10 @@ export default {
     let master = state[action.id];
     let slave = state[action.targetId];
     let merged = merge(master.transactions, slave.transactions,
-      arr => {
-        let smallest = arr.findIndex(v => v != null);
-        arr.forEach((v, i) => {
-          if (v != null && v.id < arr[smallest].id) smallest = i;
-        });
-        return smallest;
+      (a, b) => {
+        if (a == null) return 1;
+        if (b == null) return -1;
+        return a.id - b.id;
       }, () => ({ id: globalState.time.current, parent: 1, color: 4 })
     );
     console.log(merged);
