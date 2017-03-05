@@ -1,0 +1,55 @@
+@startuml
+class Database
+class QueryInterface
+interface SQL
+interface JS
+interface View
+class DocumentView
+class Bucket
+class Table
+class Indexes
+class HistoryPK
+class StorageEngine
+class BTree
+class IndexedDB
+class File
+class History
+class Merger
+interface Protocol
+interface WebRTC
+interface WebSocket
+interface HTTP
+
+Database --> QueryInterface
+Database --> View
+Database --> History
+Database --> Merger
+
+QueryInterface --> SQL
+QueryInterface --> JS
+
+View --> DocumentView
+View --> Custom
+
+DocumentView --> Bucket
+
+Bucket --> Table
+Bucket --> Indexes
+Bucket --> HistoryPK
+
+Table --> StorageEngine
+Indexes --> StorageEngine
+HistoryPK --> StorageEngine
+History -----> StorageEngine
+
+StorageEngine --> BTree
+StorageEngine --> IndexedDB
+StorageEngine --> File
+
+Merger --> Protocol
+
+Protocol --> HTTP
+Protocol --> WebSocket
+Protocol --> WebRTC
+
+@enduml
