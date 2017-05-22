@@ -1,0 +1,30 @@
+struct DescriptorTable {
+  name: String,
+}
+
+enum IndexNodeImpl {
+  Leaf {
+
+  },
+  Trunk {
+
+  }
+}
+
+struct IndexNode = Padded<IndexNodeImpl, 4096>;
+
+struct Snapshot {
+  data: BSON,
+  transactions: [i64; 63],
+  next: i64,
+}
+
+struct Transaction {
+  // ... TODO
+  data: BSON,
+}
+
+struct BookkeepingIndex {
+  size: i16,
+  transactions: [i64; 128],
+}
