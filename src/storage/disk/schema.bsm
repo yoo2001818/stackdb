@@ -1,0 +1,36 @@
+struct DescriptorTable {
+  name: String,
+}
+
+enum IndexNodeImpl<T, S> {
+  Leaf {
+    length: u16,
+    prev: u64,
+    next: u64,
+    keys: [T; S],
+    data: [u64; S + 1],
+  },
+  Trunk {
+    length: u16,
+    keys: [T; S],
+    children: [u64; S + 1],
+  }
+}
+
+struct IndexNode<T, S> = Padded<IndexNodeImpl<T, S>, 4096>;
+
+struct Snapshot {
+  data: MsgPack,
+  transactions: [u64; 63],
+  next: i64,
+}
+
+struct Transaction {
+  // ... TODO
+  data: MsgPack,
+}
+
+struct BookkeepingIndex {
+  size: i16,
+  transactions: [u64; 128],
+}
